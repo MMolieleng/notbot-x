@@ -67,7 +67,7 @@ app.post('/send', function(req, res){
   res.send("Worked")
 })
 
-let token = "EAAGYpNrBVvUBAOc8bBEPIo5j70FhnoCgdjiBINMv8WM71xEnKhgNQn5hi2FZCwAoTw72doCUoGA1CORofGcqqyycY6T3BPSSNxhLZAGNBNb9C1ZBZA3SIQeOrtjSTj9f6Vp4l9EPaBoJm45DWGDgoBjGGruq7q3yJQIpgtoZBvgZDZD"
+let token = "REPLACE_WITH_YOUR_TOKEN"
 
 // Facebook
 
@@ -85,20 +85,20 @@ app.post('/webhook/', function(req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
       let event = messaging_events[i]
       let sender = event.sender.id
-      
+
       if (event.message && event.message.text) {
         var text = event.message.text
         console.log('\n\n===========MESSAGE===========')
         console.log(event.message)
         console.log('\n\n===========END OF MESSAGE===========')
-  
+
         if (text === 'help')
           subscribe.push({user: sender, subscription: 'NEWS'})
         ref.push({user:sender, message:text});
       sendText(sender, "From The Man: "+ sender + text/*.substring(0, 100)*/)
       }
       else if (event.postback) {
-        
+
         let text = event.postback.payload
         subscribe.push({user:event.sender.id, subscription: text});
         console.log('Message : '+text+'\n From : '+event.sender.id);
